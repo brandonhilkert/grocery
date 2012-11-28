@@ -11,8 +11,8 @@
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
     %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
-    %link{href: "http://twitter.github.com/bootstrap/assets/css/bootstrap.css", rel: "stylesheet"}
-    %link{href: "http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"}
+    %link{href: "//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css", rel: "stylesheet"}
+    %link{href: "//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css", rel: "stylesheet"}
     %link{href: "#{asset_path('application.css')}", rel: "stylesheet", type: "text/css"}
 
     %link{href: "/apple-touch-icon-144x144.png", rel: "apple-touch-icon", sizes: "144x144", type: "image/png"}
@@ -29,4 +29,3 @@
             Brando's Grocery List
 
     .container-fluid= yield
-    %script{src: "#{asset_path('application.js')}"}
