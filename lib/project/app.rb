@@ -31,23 +31,25 @@ module Project
       redirect "/lists/#{list}/items"
     end
 
-    get '/lists/:list_id/items' do
-      @list = params[:list_id]
-      @items = redis.smembers("list:#{@list}:items")
+    get '/lists/:id/items' do
+      @list = Project::List.new(params[:id])
+      @items = @list.items
       haml :items
     end
 
-    post '/lists/:list_id/items' do
+    post '/lists/:id/items' do
+      list = Project::List.new(params[:id])
       unless params[:name].empty?
-        redis.sadd("list:#{params[:list_id]}:items", params[:name])
+        list.add_item(params[:name])
       end
 
-      redirect "/lists/#{params[:list_id]}/items"
+      redirect "/lists/#{list}/items"
     end
 
-    delete '/lists/:list_id/items' do
-      redis.srem("list:#{params[:list_id]}:items", params[:name])
-      redirect "lists/#{params[:list_id]}/items"
+    delete '/lists/:id/items' do
+      list = Project::List.new(params[:id])
+      list.remove_item(params[:name])
+      redirect "lists/#{list}/items"
     end
 
   end
