@@ -24,4 +24,5 @@ module Project
 end
 
 require 'project/app'
+require 'project/list'
 # Require other files in the project (ie. Models...)

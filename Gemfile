@@ -8,6 +8,7 @@ gem 'sass'
 gem 'coffee-script'
 gem 'thin'
 gem 'rake'
+gem 'haml'
 
 group :development, :test do
   gem 'debugger'

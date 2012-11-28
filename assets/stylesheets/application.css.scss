@@ -1,2 +1,45 @@
-//= require reset
-//= require base
+//= require_directory .
+
+body {
+  font-size: 1.2em;
+}
+
+.navbar-inner {
+  padding-top: 20px;
+}
+
+.new-item form {
+  margin-bottom: 3%;
+
+  input[type=text] {
+    padding: 3%;
+    width: 65%;
+    font-size: inherit;
+  }
+
+  input[type=submit] {
+    margin-top: -10px;
+    height: 38px;
+  }
+}
+
+.item form {
+  float: left;
+  margin-right: 20px;
+}
+
+.items {
+  .item {
+    margin-bottom: 3%;
+  }
+
+  a {
+    float: left;
+    margin-right: 4%;
+  }
+
+  p {
+    width: 75%;
+    float: left;
+  }
+}

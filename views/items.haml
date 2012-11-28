@@ -1,0 +1,14 @@
+.new-item
+  %form{action: "/lists/#{@list}/items", method: "post"}
+    %input.name{type: "text", placeholder: "Name", size: "30"}
+    %input.btn.btn-primary{name: "commit", type: "submit", value: "Add"}
+
+- if @items.any?
+  .items
+    - @items.each do |item|
+      .item.clearfix
+        %form{action: "/lists/#{@list}/items", method: "post"}
+          %input{name: "_method", type: "hidden", value: "delete"}
+          %input{name: "item", type: "hidden", value: item}
+          %input.btn.btn-danger.btn-small{type: "submit", value: "Delete"}
+        %p= item
