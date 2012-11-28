@@ -1,7 +1,7 @@
 module Project
   class App < Sinatra::Base
     set :root, Project.root
-    enable :sessions
+    enable  :method_override
 
     set :sprockets, Sprockets::Environment.new(root) { |env|
       env.append_path(root.join('assets', 'stylesheets'))
@@ -13,6 +13,10 @@ module Project
     end
 
     helpers do
+      def redis
+        Project.redis
+      end
+
       def asset_path(source)
         "/assets/" + settings.sprockets.find_asset(source).digest_path
       end
@@ -29,14 +33,21 @@ module Project
 
     get '/lists/:list_id/items' do
       @list = params[:list_id]
-      @items = ["asdf"]
+      @items = redis.smembers("list:#{@list}:items")
       haml :items
     end
 
     post '/lists/:list_id/items' do
-      # Add to list
-      list = params[:list_id]
-      redirect "/lists/#{list}/items"
+      unless params[:name].empty?
+        redis.sadd("list:#{params[:list_id]}:items", params[:name])
+      end
+
+      redirect "/lists/#{params[:list_id]}/items"
+    end
+
+    delete '/lists/:list_id/items' do
+      redis.srem("list:#{params[:list_id]}:items", params[:name])
+      redirect "lists/#{params[:list_id]}/items"
     end
 
   end
