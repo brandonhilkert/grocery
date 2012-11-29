@@ -1,4 +1,5 @@
 require './lib/project'
+use Rack::Deflater
 
 map '/assets' do
   run Project::App.sprockets
