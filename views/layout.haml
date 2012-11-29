@@ -8,9 +8,6 @@
     %meta{name: "apple-mobile-web-app-status-bar-style", content: "black-translucent"}
     %title= "Grocery"
     %meta{name: "description", content: "A grocery list application to share among friends."}
-    / Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-    %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
     %link{href: "//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css", rel: "stylesheet"}
     %link{href: "//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css", rel: "stylesheet"}
     %link{href: "#{asset_path('application.css')}", rel: "stylesheet", type: "text/css"}
@@ -29,3 +26,6 @@
             Brando's Grocery List
 
     .container-fluid= yield
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+    %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
