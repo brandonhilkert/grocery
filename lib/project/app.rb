@@ -12,6 +12,10 @@ module Project
       register Sinatra::Reloader
     end
 
+    configure do
+      use Rack::Deflater
+    end
+
     helpers do
       def asset_path(source)
         "/assets/" + settings.sprockets.find_asset(source).digest_path
