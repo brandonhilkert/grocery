@@ -4,11 +4,14 @@
     %input.btn.btn-primary{name: "commit", type: "submit", value: "Add"}
 
 - if @items.any?
-  .items
+  %ul.items
     - @items.each do |item|
-      .item.clearfix
-        %form{action: "/lists/#{@list}/items", method: "post"}
-          %input{name: "_method", type: "hidden", value: "delete"}
-          %input{name: "name", type: "hidden", value: item}
-          %input.btn.btn-danger.btn-small{type: "submit", value: "Delete"}
-        %p= item
+      %li.item
+        = item
+        .actions.pull-right
+          %form{action: "/lists/#{@list}/items", method: "post"}
+            %input{name: "_method", type: "hidden", value: "delete"}
+            %input{name: "name", type: "hidden", value: item}
+            %input.btn.btn-danger.btn-small{type: "submit", value: "Delete"}
+
+          %button.btn.btn-small Cancel

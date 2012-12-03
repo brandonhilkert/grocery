@@ -8,6 +8,7 @@ body {
 
 .new-item form {
   margin-bottom: 3%;
+  margin-left: 3%;
 
   input[type=text] {
     padding: 3%;
@@ -22,8 +23,28 @@ body {
 }
 
 .items {
+  margin-left: 0;
+
+  li:first-child {
+    border-top: 1px solid #ddd;
+
+  }
+
   .item {
-    margin-bottom: 3%;
+    list-style-type: none;
+    border-bottom: 1px solid #ddd;
+    padding: 4%;
+
+    .details {
+      position: absolute;
+      top: 3%;
+      left: 3%%;
+      width: 100%;
+    }
+
+    .actions {
+      display: none;
+    }
 
     form {
       float: left;
