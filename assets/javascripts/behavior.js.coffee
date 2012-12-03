@@ -3,8 +3,8 @@
 #     $(this).find(".actions").fadeIn('fast')
 # else
 $(".item").click ->
-  $(this).find(".actions").fadeIn('fast')
+  $(this).find(".actions").toggle();
 
 $(".item .actions button").click (event) ->
   event.stopPropagation()
-  $(this).parent().fadeOut('fast')
+  $(this).parent().toggle()
