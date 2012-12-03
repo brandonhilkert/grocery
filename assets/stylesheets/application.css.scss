@@ -34,13 +34,7 @@ body {
     list-style-type: none;
     border-bottom: 1px solid #ddd;
     padding: 4%;
-
-    .details {
-      position: absolute;
-      top: 3%;
-      left: 3%%;
-      width: 100%;
-    }
+    -webkit-tap-highlight-color: white;
 
     .actions {
       display: none;
