@@ -18,15 +18,17 @@ class Grocery.Views.Index extends Backbone.View
   template: template("index")
 
   events:
-    "click button": "viewItems"
+    "click button": "createList"
 
   render: ->
     @$el.html @template(@)
     @
 
-  viewItems: ->
-    listId = Grocery.generateId()
-    Grocery.app.navigate "/list/#{listId}/items", trigger: true
+  createList: ->
+    list = new Grocery.Models.List()
+    list.save {},
+      success: ->
+        Grocery.app.navigate "/list/#{list.get("id")}/items", trigger: true
 
 class Grocery.Views.NewItem extends Backbone.View
   template: template("new-item")

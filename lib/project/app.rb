@@ -24,6 +24,11 @@ module Project
       erb :index
     end
 
+    post '/lists' do
+      list = Project::List.new()
+      MultiJson.dump({ id: list.id })
+    end
+
     get '/lists/:list_id/items' do
       content_type :json
       @list = Project::List.new(params[:list_id])
