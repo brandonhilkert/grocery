@@ -19,7 +19,7 @@ module Project
     end
 
     get '/' do
-      erb :index
+      haml :index
     end
 
     post '/lists' do
