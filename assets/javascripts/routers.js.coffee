@@ -1,8 +1,8 @@
 class Grocery.Routers.App extends Backbone.Router
   initialize: ->
-    @appView = new Grocery.Views.AppView()
     chrome = new Grocery.Views.Chrome el: $("#app")
     chrome.render()
+    @$mainEl = $("#main")
 
   routes:
     "": "index"
@@ -10,8 +10,14 @@ class Grocery.Routers.App extends Backbone.Router
 
   index: ->
     view = new Grocery.Views.Index()
-    @appView.showView view
+    @$mainEl.html view.render().el
 
-  items: ->
-    view = new Grocery.Views.Index()
-    @appView.showView view
+  items: (id) ->
+    Grocery.items = new Grocery.Collections.Items [], listId: id
+    Grocery.items.fetch()
+
+    newItemView = new Grocery.Views.NewItem()
+    @$mainEl.html newItemView.render().el
+
+    itemsView = new Grocery.Views.Items collection: Grocery.items
+    @$mainEl.append itemsView.render().el

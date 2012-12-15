@@ -10,8 +10,9 @@ gem 'redis-namespace'
 gem 'thin'
 gem 'rake'
 gem 'haml'
+gem 'multi_json'
 
 group :development, :test do
-  gem 'debugger'
+  gem 'pry'
   gem 'rspec'
 end

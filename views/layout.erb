@@ -23,7 +23,7 @@
       <div class='navbar navbar-top'>
         <div class='navbar-inner'>
           <div class='container'>
-            <a class='brand' href='/'>
+            <a class='brand' href='#'>
               <i class='icon-shopping-cart'></i>
               Brando's Grocery List
             </a>
@@ -36,10 +36,24 @@
       <button class="btn btn-large btn-primary">New List</button>
     </script>
 
+    <script type="text/x-handlebars-template" id="new-item-template">
+      <input name="name" id="item" type="text" placeholder="Name" size="30" />
+      <button class="btn btn-primary">Add</button>
+    </script>
+
+    <script type="text/x-handlebars-template" id="item-template">
+      <span class="name">{{ name }}</span>
+      <div class="actions pull-right">
+        <button class="btn btn-danger btn-small">Delete</button>
+        <button class="btn btn-small">Cancel</button>
+      </div>
+    </script>
+
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
     <script src="//raw.github.com/documentcloud/backbone/master/backbone-min.js"></script>
+    <script src=""></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min.js"></script>
     <script src="<%= asset_path('application.js') %>"></script>
   </body>

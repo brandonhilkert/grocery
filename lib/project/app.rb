@@ -1,3 +1,5 @@
+require "pry"
+
 module Project
   class App < Sinatra::Base
     set :root, Project.root
@@ -22,30 +24,26 @@ module Project
       erb :index
     end
 
-    post '/lists' do
-      list = List.new
-      redirect "/lists/#{list}/items"
-    end
-
     get '/lists/:id/items' do
+      content_type :json
       @list = Project::List.new(params[:id])
-      @items = @list.items
-      haml :items
+      MultiJson.dump @list.items.map{ |item| { name: item} }
     end
 
     post '/lists/:id/items' do
       list = Project::List.new(params[:id])
-      unless params[:name].empty?
-        list.add_item(params[:name])
-      end
-
-      redirect "/lists/#{list}/items"
+      body = MultiJson.load request.body.read
+      item = body.fetch("name", nil)
+      list.add_item(item) unless item.nil?
+      :ok
     end
 
     delete '/lists/:id/items' do
       list = Project::List.new(params[:id])
-      list.remove_item(params[:name])
-      redirect "lists/#{list}/items"
+      body = MultiJson.load request.body.read
+      item = body.fetch("name", nil)
+      list.remove_item(item)
+      :ok
     end
 
   end
