@@ -6,7 +6,7 @@ class Grocery.Routers.App extends Backbone.Router
 
   routes:
     "": "index"
-    "list/:id/items": "items"
+    "lists/:id/items": "items"
 
   index: ->
     view = new Grocery.Views.Index()

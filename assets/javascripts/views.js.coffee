@@ -28,7 +28,7 @@ class Grocery.Views.Index extends Backbone.View
     list = new Grocery.Models.List()
     list.save {},
       success: ->
-        Grocery.app.navigate "/list/#{list.get("id")}/items", trigger: true
+        Grocery.app.navigate "/lists/#{list.get("id")}/items", trigger: true
 
 class Grocery.Views.NewItem extends Backbone.View
   template: template("new-item")
