@@ -10,5 +10,5 @@ _.extend Grocery, Backbone.Events
 @template = (name) ->
   Handlebars.compile $("#" + name + "-template").html()
 
-Grocery.generateListId = ->
+Grocery.generateId = ->
   Math.random().toString(36).substring(6)

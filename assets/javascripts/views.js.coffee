@@ -25,7 +25,7 @@ class Grocery.Views.Index extends Backbone.View
     @
 
   viewItems: ->
-    listId = Grocery.generateListId()
+    listId = Grocery.generateId()
     Grocery.app.navigate "/list/#{listId}/items", trigger: true
 
 class Grocery.Views.NewItem extends Backbone.View
@@ -43,7 +43,7 @@ class Grocery.Views.NewItem extends Backbone.View
   addItem: ->
     item = $("#item").val()
     Grocery.items.create
-      name: item
+      name:   item
 
     $("#item").val("")
 
@@ -69,11 +69,28 @@ class Grocery.Views.Items extends Backbone.View
     itemView = new Grocery.Views.Item model: item
     @$el.append itemView.render().el
 
+
 class Grocery.Views.Item extends Backbone.View
   className: "item"
   tagName: "li"
   template: template("item")
 
+  events:
+    "click li":       "toggleActions"
+    "click .cancel":  "toggleActions"
+    "click .delete":  "deleteItem"
+
+  initialize: ->
+    @model.on "destroy", @remove, @
+
   render: ->
     @$el.html @template(@model.toJSON())
     @
+
+  toggleActions: (event) ->
+    $(event.currentTarget).find(".actions").toggle()
+
+  deleteItem: (event) ->
+    item = $(event.currentTarget).data("name")
+    model = Grocery.items.where name: item
+    model[0].destroy()

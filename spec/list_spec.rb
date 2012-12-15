@@ -24,23 +24,25 @@ describe Project::List do
   end
 
   it "can retrieve items for a key" do
-    Project.redis.sadd(list.key, "eggs")
-    Project.redis.sadd(list.key, "apples")
+    Project.redis.hset(list.key, "qwer", "eggs")
+    Project.redis.hset(list.key, "zxcv", "apples")
     list.items.should have(2).items
   end
 
   it "can create a new item" do
-    Project.redis.sadd(list.key, "eggs")
-    list.add_item("apples")
+    Project.redis.hset(list.key, "qwer", "eggs")
+    item = list.add_item("apples")
     list.items.should have(2).items
+
+    item.should == { id: item.fetch(:id), name: "apples" }
   end
 
   it "can delete an item" do
-    Project.redis.sadd(list.key, "eggs")
-    Project.redis.sadd(list.key, "apples")
-    list.remove_item("apples")
+    Project.redis.hset(list.key, "qwer", "eggs")
+    Project.redis.hset(list.key, "zxcv", "apples")
+    list.remove_item("zxcv")
 
-    list.items.should have(1).items
-    list.items.should_not include("apples")
+    list.items.count.should == 1
+    list.items.should_not include({ "zxcv" => "apples" })
   end
 end
